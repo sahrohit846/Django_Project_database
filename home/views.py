@@ -2,15 +2,21 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.http import FileResponse
 import os
-from home.models import Contact
-# from .models import Contact
+from home.models import Contact , User
+# from home.models import Profile
 from datetime import datetime
-from django.contrib import messages
-
-# messages.add_message(request, messages.INFO, "Hello world.")
-
 from django.utils import timezone
+from django.conf import settings
+
+
+
+from django.contrib import messages
+from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required 
+import random
+import string
+from .models import *
 
 
 
@@ -28,8 +34,7 @@ def about(request):
  
     return render(request,'about.html')
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
+
 from .models import Contact
 from datetime import datetime
 
@@ -65,14 +70,7 @@ def LogoutPage(request):
 
 #Regitration and login views 
 
-from django.shortcuts import render,HttpResponse,redirect
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.decorators import login_required 
-import random
-import string
-from .models import *
+
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -98,7 +96,28 @@ def SignupPage(request):
             email = request.POST.get('email')  # Get the email from the form <name value>
             pass1 = request.POST.get('password1')  # Get the password from the form <name value>
             pass2 = request.POST.get('password2')  # Get the confirm password from the form <name value>
-
+            
+            # Check if a user with the provided username already exists
+            if User.objects.filter(username=uname).exists():
+                messages.error(request, 'Username already exists')
+                return redirect('signup')
+            
+            # Check if the email address is valid
+            if not email.endswith(settings.EMAIL_DOMAIN):
+                messages.error(request, 'Invalid email address')
+                return redirect('signup')
+            
+            # Check if the password meets the required complexity (at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character)
+            
+            if (len(pass1) < 6 or not any(char.isupper() for char in pass1) or 
+                not any(char.islower() for char in pass1) or 
+                not any(char.isdigit() for char in pass1) or 
+                    not any(char in string.punctuation for char in pass1)):
+                    messages.error(request, 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character')
+                    return redirect('signup')
+                                                
+          
+        
             # Check if the passwords match
             if pass1 != pass2:
                 # If they don't match, return an error message
@@ -110,9 +129,10 @@ def SignupPage(request):
                 my_user.save()
                 messages.success(request, "Your account has been created successfully!")
                
-               #  store the ojects in profile model
-                profile_obj= Profile.object.create(User= my_user)
-                profile_obj.save()
+            #    #  store the ojects in profile model
+            #     profile_obj= Profile.objects.create(User= my_user)
+            #     messages.success(request, "Your account has been created successfully!")
+            #     profile_obj.save()
                 
                
                 # Redirect the user to the login page
@@ -120,6 +140,7 @@ def SignupPage(request):
 
         except Exception as e:
             # Handle any unexpected errors
+            print(e)
             messages.error(request, f"An error occurred during signup: {str(e)}")
 
     return render(request, 'signup.html')
@@ -204,7 +225,8 @@ def ForgotPasswordView(request):
             return redirect('forgot_email')
     return render(request, 'forgot_email.html')
 
-#  
+
+#  change password views
 
 
 def ChangePassword(request , token):

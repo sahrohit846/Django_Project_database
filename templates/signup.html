@@ -177,10 +177,10 @@ button{
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form action="" method="post">
+    <form action="{% url 'signup'%}" method="post">
         {% csrf_token %} 
-        <h1 style="text-align: center;"><span style="color: green;">Quantum_Simulator</span></h1>
-        <h3>Signup Here</h3>
+        <h1 style="text-align: center;"><span style="color: #f09819;">Quantum_Simulator</span></h1>
+        <h3 style="text-align: center;"><span style="color: greenyellow;">Signup Here</span></h3>
 
         <label for="username">Username</label>
         <input type="text" placeholder="Username" id="username"  name="username">

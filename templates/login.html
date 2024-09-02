@@ -240,8 +240,8 @@ button{
 
 
     <form method="post">
-        <h1 style="text-align: center;"><span style="color: green;">Quantum_Simulator</span></h1>
-        <h3>Login Here</h3>
+        <h1 style="text-align: center;"><span style="color: #f09819;">Quantum_Simulator</span></h1>
+        <h3 style="text-align: center;"><span style="color: greenyellow;">Login Here</span></h3>
         {% csrf_token %} 
         <label for="username">Username</label>
         <input type="text" placeholder="Enter Username" id="username" name="username">
@@ -264,6 +264,10 @@ button{
           <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
         </div> -->
         <a href="{% url 'signup' %}">Create a account</a>
+
+
+        
     </form>
+    
 </body>
 </html>
