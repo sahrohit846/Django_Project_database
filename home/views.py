@@ -18,6 +18,7 @@ import random
 import string
 from .models import *
 
+from .helpers import send_forget_password_mail
 
 
 # Create your views here.
@@ -133,6 +134,7 @@ def SignupPage(request):
             #     profile_obj= Profile.objects.create(User= my_user)
             #     messages.success(request, "Your account has been created successfully!")
             #     profile_obj.save()
+                
                 
                
                 # Redirect the user to the login page
@@ -263,7 +265,7 @@ def ChangePassword(request , token):
         
     except Exception as e:
         print(e)
-    return render(request , 'change-password.html' , context)
+    return render(request , 'change_password.html' , context)
    
  
 
