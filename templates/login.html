@@ -1,0 +1,295 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Design by foolishdeveloper.com -->
+    <title>Login Page</title>
+    
+    <link rel="stylesheet" href="{% static 'Authstyles.css' %}">
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+ <!--Stylesheet-->
+ <style media="screen">
+  /* Global Styles */
+  *,
+  *:before,
+  *:after {
+    /* Remove default padding and margin */
+    padding: 0;
+    margin: 0;
+    /* Set box-sizing to border-box for all elements */
+    box-sizing: border-box;
+  }
+
+  /* Body Styles */
+  body {
+    /* Set background color to a dark gray */
+    background-color: #080710;
+    /* Set display to flex and flex-direction to column */
+    display: flex;
+    flex-direction: column;
+    /* Set minimum height to 100vh */
+    min-height: 100vh;
+  }
+
+  /* Background Styles */
+  .background {
+    /* Set width and height to 430px and 520px respectively */
+    width: 430px;
+    height: 520px;
+    /* Set position to absolute and transform to translate(-50%, -50%) */
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* Set left and top to 50% */
+    left: 50%;
+    top: 50%;
+  }
+
+  /* Shape Styles */
+  .background .shape {
+    /* Set height and width to 200px */
+    height: 200px;
+    width: 200px;
+    /* Set position to absolute and border-radius to 50% */
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  /* First Shape Styles */
+  .shape:first-child {
+    /* Set background to a linear gradient */
+    background: linear-gradient(
+      #1845ad,
+      #23a2f6
+    );
+    /* Set left and top to -80px */
+    left: -80px;
+    top: -80px;
+  }
+
+  /* Last Shape Styles */
+  .shape:last-child {
+    /* Set background to a linear gradient */
+    background: linear-gradient(
+      to right,
+      #ff512f,
+      #f09819
+    );
+    /* Set right and bottom to -30px and -80px respectively */
+    right: -30px;
+    bottom: -80px;
+  }
+
+  /* Form Styles */
+  form {
+    /* Set height and width to 575px and 400px respectively */
+    height: 575px;
+    width: 400px;
+    /* Set background color to a light gray with opacity */
+    background-color: rgba(255, 255, 255, 0.13);
+    /* Set position to absolute and transform to translate(-50%, -50%) */
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* Set top and left to 50% */
+    top: 50%;
+    left: 50%;
+    /* Set border-radius to 10px and border to 2px solid light gray */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    /* Set box-shadow to 0 0 40px dark gray */
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    /* Set padding to 50px 35px */
+    padding: 50px 35px;
+  }
+
+  /* Form Element Styles */
+  form * {
+    /* Set font family to Poppins and color to white */
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    /* Set letter spacing to 0.5px */
+    letter-spacing: 0.5px;
+    /* Remove outline and border */
+    outline: none;
+    border: none;
+  }
+
+  /* Form Header Styles */
+  form h3 {
+    /* Set font size to 32px and font weight to 500 */
+    font-size: 32px;
+    font-weight: 500;
+    /* Set line height to 42px and text align to center */
+    line-height: 42px;
+    text-align: center;
+  }
+
+  /* Label Styles */
+  label {
+    /* Set display to block and margin top to 30px */
+    display: block;
+    margin-top: 30px;
+    /* Set font size to 16px and font weight to 500 */
+    font-size: 16px;
+    font-weight: 500;
+}/* Style for input fields */
+input{
+  display: block; /* Ensures each input takes a full line */
+  height: 50px; /* Sets the height of the input field */
+  width: 100%; /* Makes the input field take up the full width of its container */
+  background-color: rgba(255,255,255,0.07); /* Sets a semi-transparent background color */
+  border-radius: 3px; /* Rounds the corners of the input field */
+  padding: 0 10px; /* Adds padding inside the input field */
+  margin-top: 8px; /* Adds space above each input field */
+  font-size: 14px; /* Sets the font size inside the input field */
+  font-weight: 300; /* Sets the font weight to light */
+}
+
+/* Style for placeholder text inside input fields */
+::placeholder{
+  color: #e5e5e5; /* Sets the color of the placeholder text */
+}
+
+/* Style for the submit button */
+button{
+  margin-top: 25px; /* Adds space above the button */
+  width: 100%; /* Makes the button take up the full width of its container */
+  background-color: #ffffff; /* Sets the background color of the button */
+  color: #080710; /* Sets the text color inside the button */
+  padding: 15px 0; /* Adds padding inside the button */
+  font-size: 18px; /* Sets the font size inside the button */
+  font-weight: 600; /* Makes the font inside the button bolder */
+  border-radius: 5px; /* Rounds the corners of the button */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+}
+
+/* Style for social login buttons container */
+.social{
+margin-top: 30px; /* Adds space above the social login buttons */
+display: flex; /* Displays the social login buttons in a flex container */
+}
+
+/* Style for each social login button */
+.social div{
+background: red; /* Sets a red background (will be overridden by the next line) */
+width: 150px; /* Sets the width of each social login button */
+border-radius: 3px; /* Rounds the corners of the social login button */
+padding: 5px 10px 10px 5px; /* Adds padding inside the social login button */
+background-color: rgba(255,255,255,0.27); /* Sets a semi-transparent background color */
+color: #eaf0fb; /* Sets the text color inside the social login button */
+text-align: center; /* Centers the text inside the social login button */
+}
+
+/* Hover effect for social login buttons */
+.social div:hover{
+background-color: rgba(255,255,255,0.47); /* Lightens the background color on hover */
+}
+
+/* Style for the Facebook social login button */
+.social .fb{
+margin-left: 25px; /* Adds space to the left of the Facebook button */
+}
+
+/* Style for icons inside the social login buttons */
+.social i{
+margin-right: 4px; /* Adds space to the right of the icon */
+}
+
+/* Style for alert messages */
+.alert {
+  padding: 10px; /* Adds padding inside the alert box */
+  margin-bottom: 15px; /* Adds space below the alert box */
+  border-radius: 5px; /* Rounds the corners of the alert box */
+  text-align: center; /* Centers the text inside the alert box */
+}
+
+/* Style for error alerts */
+.alert-error {
+  background-color: #f8d7da; /* Sets the background color for error alerts */
+  color: #721c24; /* Sets the text color for error alerts */
+}
+
+/* Style for success alerts */
+.alert-success {
+  background-color: #d4edda; /* Sets the background color for success alerts */
+  color: #155724; /* Sets the text color for success alerts */
+}
+
+/* Body styling */
+body {
+background-color: #080710; /* Sets the background color of the body */
+display: flex; /* Applies flexbox layout to the body */
+flex-direction: column; /* Arranges body content in a column */
+min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
+}
+
+/* Footer styling */
+footer {
+margin-top: auto; /* Pushes the footer to the bottom of the page */
+text-align: center; /* Centers the text inside the footer */
+background-color: grey; /* Sets the background color of the footer */
+opacity: 0.7; /* Makes the footer semi-transparent */
+padding: 15px 0; /* Adds padding inside the footer */
+color: #fff; /* Sets the text color inside the footer */
+}
+</style>
+
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+    <form method="post">
+        <h1 style="text-align: center;"><span style="color: #f09819;">Quantum_Simulator</span></h1>
+        <h3 style="text-align: center;"><span style="color: greenyellow;">Login Here</span></h3>
+        {% csrf_token %} 
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter Username" id="username" name="username">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password" name="pass">
+        
+        <br>
+
+        <div class="forgot-options">
+            {% comment %} <a href="{% url 'forgot_email' %}" class="forgot-email">Forgot Email ID?</a><br> {% endcomment %}
+            <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot Password?</a>
+            
+        </div>
+
+        <button type="submit">Log In</button>
+        <br>
+      </br>
+        <!-- <input type="button" value=""> -->
+        <!-- <div class="social">
+          <div class="go"><i class="fab fa-google"></i>  Google</div>
+          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        </div> -->
+        <a href="{% url 'signup' %}">Create a account</a>
+
+
+        
+    </form>
+    <footer class="footer">
+      <div class="container">
+          <p class="mb-0">Copyright &copy; CDAC-Patna | All rights reserved</p>
+      </div>
+  </footer>
+    
+</body>
+</html>

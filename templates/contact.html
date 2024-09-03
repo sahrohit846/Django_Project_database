@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container-fluid px-0">
+  <!-- Here image fetching from unsplash API -->
+
+  <img src="https://source.unsplash.com/800x200/?contact" class="d-block w-100 mx-0" alt="contact us" srcset="" />
+  <!-- <img src="./../static/img/contactimg.jpg" class="d-block w-100 mx-0" alt="contact us" srcset="" /> -->
+</div>
+<div class="container-fluid">
+  <h1 class="text-center">Contact Us</h1>
+  <form class="row g-3 justify-content-center" style="width: 50vw; margin-left: auto; margin-right: auto"
+    action="/contact" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="inputName" class="form-label">Name :</label>
+      <input type="text" class="form-control" id="Name" name="name" placeholder="Enter your name" required />
+    </div>
+    <div class="form-group">
+      <label for="inputEmail4" class="form-label">Email :</label>
+      <input type="email" class="form-control" id="Email" name="email" placeholder="Enter Your email address"
+        required />
+    </div>
+    <div class="form-group">
+      <label for="inputPhone" class="form-label">Phone Number :</label>
+      <input type="text" class="form-control" id="Phone" name="phone" placeholder="Enter Your phone number" min="0"
+        oninput="this.value = Math.abs(this.value).toString().substring(0, 10);" required />
+      <small id="phoneHelp" class="form-text text-muted">Please enter a 10-digit phone number.</small>
+    </div>
+    <div class="form-group">
+      <label for="inputCity" class="form-label">Your Comments :</label>
+      <textarea class="form-control" id="desc" name="desc" rows="4" name="desc"></textarea>
+    </div>
+    <div class="col-12 text-center my-2">
+      <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+  </form>
+</div>
+
+{% endblock body %}
