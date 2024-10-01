@@ -1,9 +1,9 @@
-from django.contrib import admin
-from django.urls import path
+from django.contrib import admin # type: ignore
+from django.urls import path # type: ignore
 from . import views
-from django.urls import path
+from django.urls import path # type: ignore
 # from .views import ResetPasswordView
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views # type: ignore
 from .views import reset_password
 urlpatterns = [
     
