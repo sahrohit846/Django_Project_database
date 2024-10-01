@@ -1,258 +1,228 @@
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Design by foolishdeveloper.com -->
     <title>Login Page</title>
     
     <link rel="stylesheet" href="{% static 'Authstyles.css' %}">
- 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     
- <!--Stylesheet-->
- <style media="screen">
-  /* Global Styles */
-  *,
-  *:before,
-  *:after {
-    /* Remove default padding and margin */
-    padding: 0;
-    margin: 0;
-    /* Set box-sizing to border-box for all elements */
-    box-sizing: border-box;
-  }
+   
 
-  /* Body Styles */
-  body {
-    /* Set background color to a dark gray */
-    background-color: #080710;
-    /* Set display to flex and flex-direction to column */
-    display: flex;
-    flex-direction: column;
-    /* Set minimum height to 100vh */
-    min-height: 100vh;
-  }
+     <!-- Particles.js library -->
+     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+   
+    
+     <!-- Include your custom particles.js config -->
+     <script src="{% static 'js/particles-config.js' %}"></script>
+ 
+    
+    <style>
+        /* Stylesheet */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #080710;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+        .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
+        form {
+            height: 610px;
+            width: 450px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        input {
+            display: block;
+            height: 40px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        ::placeholder {
+            color: #e5e5e5;
+        }
+        button {
+            margin-top: 14px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .forgot-options {
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            background-color: grey;
+            opacity: 0.7;
+            padding: 15px 0;
+            color: #fff;
+        }
+        /* Navbar styling */
+        nav {
+            background-color: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+        /* Footer sticky */
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+            background: linear-gradient(to right, #007bff, #343a40);
+            transition: background 0.5s ease;
+        }
+        footer:hover {
+            background: linear-gradient(to right, #343a40, #007bff);
+        }
 
-  /* Background Styles */
-  .background {
-    /* Set width and height to 430px and 520px respectively */
-    width: 430px;
-    height: 520px;
-    /* Set position to absolute and transform to translate(-50%, -50%) */
-    position: absolute;
-    transform: translate(-50%, -50%);
-    /* Set left and top to 50% */
-    left: 50%;
-    top: 50%;
-  }
+         /* Nav  Hover Animation  */
+         nav {
+            background: linear-gradient(to right, #007bff, #343a40);
+            color: white;
+            transition: background 0.5s ease;
+        }
+        
+        nav:hover {
+            background: linear-gradient(to right, #343a40, #007bff);
+        }
 
-  /* Shape Styles */
-  .background .shape {
-    /* Set height and width to 200px */
-    height: 200px;
-    width: 200px;
-    /* Set position to absolute and border-radius to 50% */
-    position: absolute;
-    border-radius: 50%;
-  }
 
-  /* First Shape Styles */
-  .shape:first-child {
-    /* Set background to a linear gradient */
-    background: linear-gradient(
-      #1845ad,
-      #23a2f6
-    );
-    /* Set left and top to -80px */
-    left: -80px;
-    top: -80px;
-  }
 
-  /* Last Shape Styles */
-  .shape:last-child {
-    /* Set background to a linear gradient */
-    background: linear-gradient(
-      to right,
-      #ff512f,
-      #f09819
-    );
-    /* Set right and bottom to -30px and -80px respectively */
-    right: -30px;
-    bottom: -80px;
-  }
 
-  /* Form Styles */
-  form {
-    /* Set height and width to 575px and 400px respectively */
-    height: 575px;
-    width: 400px;
-    /* Set background color to a light gray with opacity */
-    background-color: rgba(255, 255, 255, 0.13);
-    /* Set position to absolute and transform to translate(-50%, -50%) */
-    position: absolute;
-    transform: translate(-50%, -50%);
-    /* Set top and left to 50% */
-    top: 50%;
-    left: 50%;
-    /* Set border-radius to 10px and border to 2px solid light gray */
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    /* Set box-shadow to 0 0 40px dark gray */
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    /* Set padding to 50px 35px */
-    padding: 50px 35px;
-  }
-
-  /* Form Element Styles */
-  form * {
-    /* Set font family to Poppins and color to white */
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    /* Set letter spacing to 0.5px */
-    letter-spacing: 0.5px;
-    /* Remove outline and border */
-    outline: none;
-    border: none;
-  }
-
-  /* Form Header Styles */
-  form h3 {
-    /* Set font size to 32px and font weight to 500 */
-    font-size: 32px;
-    font-weight: 500;
-    /* Set line height to 42px and text align to center */
-    line-height: 42px;
-    text-align: center;
-  }
-
-  /* Label Styles */
-  label {
-    /* Set display to block and margin top to 30px */
-    display: block;
-    margin-top: 30px;
-    /* Set font size to 16px and font weight to 500 */
-    font-size: 16px;
-    font-weight: 500;
-}/* Style for input fields */
-input{
-  display: block; /* Ensures each input takes a full line */
-  height: 50px; /* Sets the height of the input field */
-  width: 100%; /* Makes the input field take up the full width of its container */
-  background-color: rgba(255,255,255,0.07); /* Sets a semi-transparent background color */
-  border-radius: 3px; /* Rounds the corners of the input field */
-  padding: 0 10px; /* Adds padding inside the input field */
-  margin-top: 8px; /* Adds space above each input field */
-  font-size: 14px; /* Sets the font size inside the input field */
-  font-weight: 300; /* Sets the font weight to light */
+        /* Responsive design */
+@media screen and (max-width: 992px){
+    form{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px){
+    form{
+        width: 90%;
+    }
 }
 
-/* Style for placeholder text inside input fields */
-::placeholder{
-  color: #e5e5e5; /* Sets the color of the placeholder text */
-}
 
-/* Style for the submit button */
-button{
-  margin-top: 25px; /* Adds space above the button */
-  width: 100%; /* Makes the button take up the full width of its container */
-  background-color: #ffffff; /* Sets the background color of the button */
-  color: #080710; /* Sets the text color inside the button */
-  padding: 15px 0; /* Adds padding inside the button */
-  font-size: 18px; /* Sets the font size inside the button */
-  font-weight: 600; /* Makes the font inside the button bolder */
-  border-radius: 5px; /* Rounds the corners of the button */
-  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
-}
 
-/* Style for social login buttons container */
-.social{
-margin-top: 30px; /* Adds space above the social login buttons */
-display: flex; /* Displays the social login buttons in a flex container */
-}
-
-/* Style for each social login button */
-.social div{
-background: red; /* Sets a red background (will be overridden by the next line) */
-width: 150px; /* Sets the width of each social login button */
-border-radius: 3px; /* Rounds the corners of the social login button */
-padding: 5px 10px 10px 5px; /* Adds padding inside the social login button */
-background-color: rgba(255,255,255,0.27); /* Sets a semi-transparent background color */
-color: #eaf0fb; /* Sets the text color inside the social login button */
-text-align: center; /* Centers the text inside the social login button */
-}
-
-/* Hover effect for social login buttons */
-.social div:hover{
-background-color: rgba(255,255,255,0.47); /* Lightens the background color on hover */
-}
-
-/* Style for the Facebook social login button */
-.social .fb{
-margin-left: 25px; /* Adds space to the left of the Facebook button */
-}
-
-/* Style for icons inside the social login buttons */
-.social i{
-margin-right: 4px; /* Adds space to the right of the icon */
-}
-
-/* Style for alert messages */
-.alert {
-  padding: 10px; /* Adds padding inside the alert box */
-  margin-bottom: 15px; /* Adds space below the alert box */
-  border-radius: 5px; /* Rounds the corners of the alert box */
-  text-align: center; /* Centers the text inside the alert box */
-}
-
-/* Style for error alerts */
-.alert-error {
-  background-color: #f8d7da; /* Sets the background color for error alerts */
-  color: #721c24; /* Sets the text color for error alerts */
-}
-
-/* Style for success alerts */
-.alert-success {
-  background-color: #d4edda; /* Sets the background color for success alerts */
-  color: #155724; /* Sets the text color for success alerts */
-}
-
-/* Body styling */
-body {
-background-color: #080710; /* Sets the background color of the body */
-display: flex; /* Applies flexbox layout to the body */
-flex-direction: column; /* Arranges body content in a column */
-min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
-}
-
-/* Footer styling */
-footer {
-margin-top: auto; /* Pushes the footer to the bottom of the page */
-text-align: center; /* Centers the text inside the footer */
-background-color: grey; /* Sets the background color of the footer */
-opacity: 0.7; /* Makes the footer semi-transparent */
-padding: 15px 0; /* Adds padding inside the footer */
-color: #fff; /* Sets the text color inside the footer */
-}
-</style>
-
+    </style>
 </head>
 <body>
+    <!-- nav-bar section  -->
+    <nav>
+        <h2>Quantum Simulator</h2>
+        <ul>
+            <li><a href="{% url 'landing' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Simulator</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Particle Background -->
+    <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    {% if messages %}
-    {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 
     <form method="post">
         <h1 style="text-align: center;"><span style="color: #f09819;">Quantum_Simulator</span></h1>
@@ -260,36 +230,138 @@ color: #fff; /* Sets the text color inside the footer */
         {% csrf_token %} 
         <label for="username">Username</label>
         <input type="text" placeholder="Enter Username" id="username" name="username">
-
+        
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password" name="pass">
         
-        <br>
-
         <div class="forgot-options">
-            {% comment %} <a href="{% url 'forgot_email' %}" class="forgot-email">Forgot Email ID?</a><br> {% endcomment %}
             <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot Password?</a>
-            
         </div>
 
         <button type="submit">Log In</button>
         <br>
-      </br>
-        <!-- <input type="button" value=""> -->
-        <!-- <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div> -->
-        <a href="{% url 'signup' %}">Create a account</a>
+    </br>
+        {% comment %} <p>Don't have an account? <a href="{% url'signup' %}">Sign Up</a></p> {% endcomment %}
 
-
-        
+        <div >
+        <a href="{% url 'signup' %}">Create an account</a>
+        </div>
     </form>
+
     <footer class="footer">
-      <div class="container">
-          <p class="mb-0">Copyright &copy; CDAC-Patna | All rights reserved</p>
-      </div>
-  </footer>
-    
+        <div class="container">
+            <p class="mb-0">Copyright &copy; CDAC-Patna | All rights reserved</p>
+        </div>
+    </footer>
+
+   <!-- Include your custom particles.js config -->
+   <script src="{% static 'js/particles-config.js' %}"></script>
+    {% comment %} <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script> {% endcomment %}
 </body>
 </html>

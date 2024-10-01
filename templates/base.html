@@ -19,7 +19,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      {% comment %} <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" href="/simulator">Home</a>
@@ -30,13 +30,18 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
           </li>
-        </ul>
+        </ul> {% endcomment %}
 
         <ul class="navbar-nav ms-auto">
           <!-- Move Admin link to the right side -->
           <li class="nav-item me-4">
-            <a class="nav-link fw-bold" href="/admin">Admin</a>
+          
+            <li class="nav-item">
+            <a class="btn btn-primary" href="/admin">Admin</a>
+            </li>
+          <li>
             <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+          </li>
           </li>
         </ul>
       </div>
@@ -74,11 +79,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script src="./../static/codeGenerator.js"></script>
-  <!-- <script src="./../static/matrixPrint.js"></script> -->
   <script src="./../static/matrix.js"></script>
 
-  <!-- <script src="./../static/measureGate.js"></script> -->
-  <!-- <script src="./../static/test.js"></script> -->
+
 </body>
 
 </html>

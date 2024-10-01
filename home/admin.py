@@ -5,8 +5,8 @@ admin.site.register(Contact)
 
 
 
-from home.models import Profile 
-# Register your models here.
-admin.site.register(Profile)
+# from home.models import Profile 
+# # Register your models here.
+# admin.site.register(Profile)
 
  

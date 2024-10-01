@@ -134,9 +134,9 @@ button{
 <body>
     <form method="post">
         {% csrf_token %}
-        <h3>Forgot Email ID</h3>
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter Username" id="username" name="username" required>
+        <h3>Forget Password</h3>
+        <label for="email">Email ID</label>
+        <input type="text" placeholder="Enter email id" id="email" name="email" required>
         <button type="submit">Submit</button>
     </form>
     {% if messages %}

@@ -59,36 +59,54 @@ def contact(request):
 
 def quantum_grocery(request):
  
-        return render("Data uploaded Soon ! :)")
+        return render("Data uploaded Soon ! :)") # type: ignore
     
     
+    
+#*************************Regitration and login views **********************
+def landing_page(request):
+    return render(request, 'landing.html')
+ 
+def user_dashboard(request):
+    # Check if the user is a superuser (admin)
+    # if request.user.is_superuser:
+    #     return render(request, 'admin_dashboard.html')  # Separate template for admins
+    # else:
+    #     return render(request, 'user_dashboard.html')  # For regular users
+
+    return render (request,'home.html')
 
 
+from django.contrib.auth import logout
 
 def LogoutPage(request):
     logout(request)
-    return redirect('login')
-
-#Regitration and login views 
-
+    # messages.success(request, "You have been logged out successfully.")
+    return redirect('landing')
 
 
-from django.conf import settings
-from django.core.mail import send_mail
 
-from django.contrib.auth.models import User
 # from django.contrib.auth.models import Profile
 
 
 # Create your views here.
 @login_required(login_url='login') 
 def HomePage(request):
-    return render (request,'simulator.html')
+    if request.user.is_superuser:
+       return render(request, 'admin.site.urls')  # Separate template for admins
+    else:
+       return render(request, 'simulator.html')  # For regular users
+    # return render(request, 'admin_dashboard.html')
+    # return render (request,'simulator.html')
 
 
 
 # 
 def SignupPage(request):
+     # If the user is already logged in, redirect to the home page
+    if request.user.is_authenticated:
+     return redirect('simulator')
+ 
     # Check if the request method is POST (i.e., the user submitted the form)
     if request.method == 'POST':
         try:
@@ -125,7 +143,7 @@ def SignupPage(request):
                 messages.error(request, "Your password and confirm password are not the same!!")
             else:
                 # If they match, create a new user
-                my_user = User.objects.create_user(uname, email, pass1)
+                my_user = User.objects.create_user(uname, email, pass1) # type: ignore
                 # Save the new user to the database
                 my_user.save()
                 messages.success(request, "Your account has been created successfully!")
@@ -134,6 +152,7 @@ def SignupPage(request):
             #     profile_obj= Profile.objects.create(User= my_user)
             #     messages.success(request, "Your account has been created successfully!")
             #     profile_obj.save()
+                
                 
                
                 # Redirect the user to the login page
@@ -146,33 +165,82 @@ def SignupPage(request):
 
     return render(request, 'signup.html')
 
-    
-def LoginPage(request):
-    if request.method=='POST':
-        username=request.POST.get('username')
-        pass1=request.POST.get('pass')
+# login page setup 
+# def LoginPage(request):
+#     # If the user is already logged in, redirect to the home page
+#     if request.user.is_authenticated:
+#         return redirect('simulator')
+# # If the user is not logged in, display the login page
+#     if request.method=='POST':
+#         username=request.POST.get('username')
+#         pass1=request.POST.get('pass')
         
-         # Check if both username and password are not  provided
-        if not username or not pass1:
-            messages.error(request,'Both username & Password are required')
-            return redirect('login')
+#          # Check if both username and password are not  provided
+#         if not username or not pass1:
+#             messages.error(request,'Both username & Password are required')
+#             return redirect('login')
         
         
-        user=authenticate(request,username=username,password=pass1)
+#         user=authenticate(request,username=username,password=pass1)
         
-        if user is not None:
+#         if user is not None:
            
-            login(request,user)
-            messages.success(request, f' welcome {username} !!')
+#             login(request,user)
+#             messages.success(request, f' welcome {username} !!')
             
-            return redirect('simulator')
+#             return redirect('simulator')
            
+#         else:
+#             messages.error (request,message="Username or Password is incorrect!!!")
+#             return redirect('login')  # Redirect to the login page to show the message
+
+#     return render (request,'login.html')
+ 
+ 
+ 
+ 
+ 
+#  **********************here authenticate if superuser found then redirect to admin panel other wise user panel(simulator)*******************
+
+# login page setup
+def LoginPage(request):
+    # If the user is already logged in, redirect based on their role (superuser or regular user)
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return redirect('admin:index')  # Redirect superusers to Django admin panel
         else:
-            messages.error (request,message="Username or Password is incorrect!!!")
+            return redirect('home')  # Redirect regular users to the simulator page
+        
+           # return redirect('simulator')  # Redirect regular users to the simulator page
+
+    # If the user is not logged in, display the login page
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        pass1 = request.POST.get('pass')
+
+        # Check if both username and password are provided
+        if not username or not pass1:
+            messages.error(request, 'Both username & Password are required')
+            return redirect('login')
+
+        user = authenticate(request, username=username, password=pass1)
+
+        if user is not None:
+            login(request, user)
+           # messages.success(request, f'Welcome {username} !!')
+
+            # Redirect based on whether the user is a superuser or a regular user
+            if user.is_superuser:
+                return redirect('admin:index')  # Redirect superusers to the Django admin panel
+            else:
+                return redirect('home')  # Redirect regular users to the simulator page
+
+        else:
+            messages.error(request, "Username or Password is incorrect!!!")
             return redirect('login')  # Redirect to the login page to show the message
 
-    return render (request,'login.html')
- 
+    return render(request, 'login.html')
+
  
   
  
@@ -185,12 +253,12 @@ def ForgotEmailView(request):
             user = User.objects.get(email=email)
             # Generate a new password
             new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
-            user.set_password(new_password)
+            user.set_password(new_password) # type: ignore
             user.save()
             # Send the new password to the user's email address
             send_mail(
                 'Your New Password',
-                f'Hello {user.username}, your new password is {new_password}.',
+                f'Hello {user.username}, your new password is {new_password}.', # type: ignore
                 settings.EMAIL_HOST_USER,
                 [email],
                 fail_silently=False,
@@ -204,91 +272,101 @@ def ForgotEmailView(request):
  
 
 
+import random
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.conf import settings
+from .forms import EmailForm
+from.forms import OTPForm
+def generate_otp():
+    return random.randint(100000, 999999)
+
+def send_otp_email(email, otp):
+    subject = 'Your OTP for Password Reset'
+    message = f'Your OTP for resetting the password is {otp}.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
+
 
 # View for Forgot Password 
 def ForgotPasswordView(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        try:
-            user = User.objects.get(username=username)
-            # Send the registered email ID to the user's email address
-            send_mail(
-                'Your Registered Email ID',
-                f'Hello {user.username}, your registered email ID is {user.email}.',
-                settings.EMAIL_HOST_USER,
-                [user.email],
-                fail_silently=False,
-            )
-            messages.success(request, 'Your registered email ID has been sent to your email.')
-            return redirect('login')
-        except User.DoesNotExist:
-            messages.error(request, 'No user found with that username.')
-            return redirect('forgot_email')
-    return render(request, 'forgot_email.html')
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            otp = generate_otp()
+            request.session['otp'] = otp
+            request.session['email'] = email
+            send_otp_email(email, otp)
+            messages.success(request, 'OTP sent to your email address.')
+            return redirect('verify_otp')
+    else:
+        form = EmailForm()
+
+    # Ensure the form is passed to the template in both GET and POST cases
+    return render(request, 'forgot_password.html', {'form': form})
 
 
-#  change password views
-
-
-def ChangePassword(request , token):
-    context = {}
-    
-    
-    try:
-        profile_obj = Profile.objects.filter(forget_password_token = token).first()
-        context = {'user_id' : profile_obj.user.id}
-        
-        if request.method == 'POST':
-            new_password = request.POST.get('new_password')
-            confirm_password = request.POST.get('reconfirm_password')
-            user_id = request.POST.get('user_id')
-            
-            if user_id is  None:
-                messages.success(request, 'No user id found.')
-                return redirect(f'/change_password/{token}/')
-                
-            
-            if  new_password != confirm_password:
-                messages.success(request, 'both should  be equal.')
-                return redirect(f'/change_password/{token}/')
-                         
-            
-            user_obj = User.objects.get(id = user_id)
-            user_obj.set_password(new_password)
-            user_obj.save()
-            return redirect('/login/')
-            
-            
-            
-        
-        
-    except Exception as e:
-        print(e)
-    return render(request , 'change_password.html' , context)
-   
  
+# for getting verify otp view
+def verify_otp(request):
+    if request.method == 'POST':
+        form = OTPForm(request.POST)
+        if form.is_valid():
+            entered_otp = form.cleaned_data['otp']
+            sent_otp = request.session.get('otp')
+            if str(entered_otp) == str(sent_otp):
+                # OTP is correct, redirect to password reset page
+                return redirect('reset_password')
+            else:
+                messages.error(request, 'Invalid OTP. Please try again.')
+    else:
+        form = OTPForm()
+    return render(request, 'verify_otp.html', {'form': form})
 
-import uuid
-def ForgetPassword(request):
-    try:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            
-            if not User.objects.filter(username=username).first():
-                messages.success(request, 'Not user found with this username.')
-                return redirect('/forget_password/')
-            
-            user_obj = User.objects.get(username = username)
-            token = str(uuid.uuid4())
-            profile_obj= Profile.objects.get(user = user_obj)
-            profile_obj.forget_password_token = token
-            profile_obj.save()
-            send_forget_password_mail(user_obj.email , token)
-            messages.success(request, 'An email is sent.')
-            return redirect('/forget-password/')
-                
-    
-    
-    except Exception as e:
-        print(e)
-    return render(request , 'forget_password.html')
+
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
+from django.contrib.auth import get_user_model
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from .forms import SetPasswordForm
+
+User = get_user_model()
+
+def reset_password(request, uidb64=None, token=None):
+    if uidb64 and token:  # This means the user has clicked the link to reset the password
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64)) #
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user and default_token_generator.check_token(user, token):
+            if request.method == 'POST':
+                form = SetPasswordForm(request.POST)
+                if form.is_valid():
+                    password = form.cleaned_data.get('password')
+                    user.set_password(password) # type: ignore
+                    user.save()
+                    update_session_auth_hash(request, user)  # type: ignore # Optional: keeps user logged in after password change
+                    messages.success(request, 'Your password has been reset successfully!')
+                    return redirect('login')
+                else:
+                    messages.error(request, 'Please correct the error below.')
+            else:
+                form = SetPasswordForm()
+            return render(request, 'reset_password.html', {'form': form})
+        else:
+            messages.error(request, 'The reset link is invalid, possibly because it has expired.')
+            return redirect('password_reset')
+
+    # If no uidb64 and token are provided, redirect to password reset page
+    return redirect('password_reset')

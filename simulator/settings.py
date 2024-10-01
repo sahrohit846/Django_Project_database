@@ -31,6 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'  # The name of your login view (if named 'login')
+
+# Session timeout (in seconds)
+SESSION_COOKIE_AGE = 1800  # Example: 30 minutes
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Application definition
 
@@ -161,8 +167,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')  # or 'sahrohit846@gmail.com'
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+EMAIL_HOST_USER = ('sahrohit846@gmail.com')  # or 'sahrohit846@gmail.com'
+EMAIL_HOST_PASSWORD = ('jwgy hxrc qnfp otrg')
 
 # Email domain restriction
 EMAIL_DOMAIN = '@gmail.com'  # Replace with your desired domain

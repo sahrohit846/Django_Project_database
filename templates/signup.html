@@ -1,4 +1,4 @@
-
+{% comment %} 
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +9,259 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
-    
+<style>
+/* <!--Stylesheet--> */
+/* < media="screen"> */
+*,
+*:before,
+*:after{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+body{
+background-color: #080710;
+}
+.background{
+width: 430px;
+height: 520px;
+position: absolute;
+transform: translate(-50%,-50%);
+left: 50%;
+top: 50%;
+}
+.background .shape{
+height: 200px;
+width: 200px;
+position: absolute;
+border-radius: 50%;
+}
+.shape:first-child{
+background: linear-gradient(
+    #1845ad,
+    #23a2f6
+);
+left: -80px;
+top: -80px;
+}
+.shape:last-child{
+background: linear-gradient(
+    to right,
+    #ff512f,
+    #f09819
+);
+right: -30px;
+bottom: -80px;
+}
+form{
+height: 650px;
+width: 450px;
+background-color: rgba(255,255,255,0.13);
+position: absolute;
+transform: translate(-50%,-50%);
+top: 50%;
+left: 50%;
+border-radius: 10px;
+backdrop-filter: blur(10px);
+border: 2px solid rgba(255,255,255,0.1);
+box-shadow: 0 0 40px rgba(8,7,16,0.6);
+padding: 50px 35px;
+}
+form *{
+font-family: 'Poppins',sans-serif;
+color: #ffffff;
+letter-spacing: 0.5px;
+outline: none;
+border: none;
+}
+form h3{
+font-size: 32px;
+font-weight: 500;
+line-height: 42px;
+text-align: center;
+}
+
+label{
+display: block;
+margin-top: 30px;
+font-size: 16px;
+font-weight: 500;
+}
+input{
+display: block;
+height: 40px;
+width: 100%;
+background-color: rgba(255,255,255,0.07);
+border-radius: 3px;
+padding: 0 10px;
+margin-top: 2px;
+font-size: 14px;
+font-weight: 300;
+}
+::placeholder{
+color: #e5e5e5;
+}
+button{
+margin-top: 14px;
+width: 100%;
+background-color: #ffffff;
+color: #080710;
+padding: 15px 0;
+font-size: 18px;
+font-weight: 600;
+border-radius: 5px;
+cursor: pointer;
+}
+.social{
+margin-top: 30px;
+display: flex;
+}
+.social div{
+background: red;
+width: 150px;
+border-radius: 3px;
+padding: 5px 10px 10px 5px;
+background-color: rgba(255,255,255,0.27);
+color: #eaf0fb;
+text-align: center;
+}
+.social div:hover{
+background-color: rgba(255,255,255,0.47);
+}
+.social .fb{
+margin-left: 25px;
+}
+.social i{
+margin-right: 4px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 992px){
+    form{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px){
+    form{
+        width: 90%;
+    }
+}
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+body {
+    background-color: #080710;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    background-color: grey;
+    opacity: 0.7;
+    padding: 15px 0;
+    color: #fff;
+}
+
+
+        /********************* Navbar styling **************/
+
+          nav {
+            background-color: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+
+  /* Nav sticky */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+/* footer sticky */
+footer {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* footer Hover Animation  */
+footer {
+    background: linear-gradient(to right, #007bff, #343a40);
+    color: white;
+    transition: background 0.5s ease;
+}
+
+footer:hover {
+    background: linear-gradient(to right, #343a40, #007bff);
+}
+
+
+ /* Nav  Hover Animation  */
+ nav {
+    background: linear-gradient(to right, #007bff, #343a40);
+    color: white;
+    transition: background 0.5s ease;
+}
+
+nav:hover {
+    background: linear-gradient(to right, #343a40, #007bff);
+}
+
+
+</style>
 </head>
 <body>
+    <nav>
+        <h2>Quantum Simulator</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Simulator</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% comment %} <li><a href="{% url 'admin_dashboard' %}">Admin</a></li> 
+        </ul>
+    </nav>
     {% if messages %}
     {% for message in messages %}
         <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -20,6 +269,8 @@
         </div>
     {% endfor %}
 {% endif %}
+
+  <!-- Navbar -->
 
     <div class="background">
         <div class="shape"></div>
@@ -57,5 +308,414 @@
             <p class="mb-0">Copyright &copy; CDAC-Patna | All rights reserved</p>
         </div>
     </footer>
+      <!-- particles.js configuration script -->
+      <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+      <script>
+          particlesJS("particles-js", {
+              "particles": {
+                  "number": {
+                      "value": 80,
+                      "density": {
+                          "enable": true,
+                          "value_area": 800
+                      }
+                  },
+                  "color": {
+                      "value": "#ffffff"
+                  },
+                  "shape": {
+                      "type": "circle",
+                      "stroke": {
+                          "width": 0,
+                          "color": "#000000"
+                      },
+                      "polygon": {
+                          "nb_sides": 5
+                      }
+                  },
+                  "opacity": {
+                      "value": 0.5,
+                      "random": false,
+                      "anim": {
+                          "enable": false,
+                          "speed": 1,
+                          "opacity_min": 0.1,
+                          "sync": false
+                      }
+                  },
+                  "size": {
+                      "value": 3,
+                      "random": true,
+                      "anim": {
+                          "enable": false,
+                          "speed": 40,
+                          "size_min": 0.1,
+                          "sync": false
+                      }
+                  },
+                  "line_linked": {
+                      "enable": true,
+                      "distance": 150,
+                      "color": "#ffffff",
+                      "opacity": 0.4,
+                      "width": 1
+                  },
+                  "move": {
+                      "enable": true,
+                      "speed": 6,
+                      "direction": "none",
+                      "random": false,
+                      "straight": false,
+                      "out_mode": "out",
+                      "bounce": false,
+                      "attract": {
+                          "enable": false,
+                          "rotateX": 600,
+                          "rotateY": 1200
+                      }
+                  }
+              },
+              "interactivity": {
+                  "detect_on": "canvas",
+                  "events": {
+                      "onhover": {
+                          "enable": true,
+                          "mode": "repulse"
+                      },
+                      "onclick": {
+                          "enable": true,
+                          "mode": "push"
+                      },
+                      "resize": true
+                  },
+                  "modes": {
+                      "grab": {
+                          "distance": 400,
+                          "line_linked": {
+                              "opacity": 1
+                          }
+                      },
+                      "bubble": {
+                          "distance": 400,
+                          "size": 40,
+                          "duration": 2,
+                          "opacity": 8,
+                          "speed": 3
+                      },
+                      "repulse": {
+                          "distance": 200,
+                          "duration": 0.4
+                      },
+                      "push": {
+                          "particles_nb": 4
+                      },
+                      "remove": {
+                          "particles_nb": 2
+                      }
+                  }
+              },
+              "retina_detect": true
+          });
+      </script>
 </body>
-</html>
+</html> 
+
+
+
+
+
+ {% endcomment %}
+
+
+
+
+ {% comment %}  {% endcomment %}
+ {% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <title>Signup Page</title>
+     <link rel="stylesheet" href="{% static 'Authstyles.css' %}">
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+     
+     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+     
+     <style>
+         /* Basic Styles */
+         * {
+             padding: 0;
+             margin: 0;
+             box-sizing: border-box;
+         }
+         body {
+             background-color: #080710;
+             display: flex;
+             flex-direction: column;
+             min-height: 100vh;
+             position: relative; /* Make the body relative for positioning */
+         }
+         /* Particles Background */
+         #particles-js {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: 1; /* Set lower z-index */
+         }
+         .background {
+             position: absolute;
+             z-index: 0; /* Set lower z-index */
+             width: 430px;
+             height: 520px;
+             transform: translate(-50%,-50%);
+             left: 50%;
+             top: 50%;
+         }
+         form {
+             height: 650px;
+             width: 450px;
+             position: absolute;
+             transform: translate(-50%,-50%);
+             top: 50%;
+             left: 50%;
+             background-color: rgba(255,255,255,0.13);
+             border-radius: 10px;
+             backdrop-filter: blur(10px);
+             border: 2px solid rgba(255,255,255,0.1);
+             box-shadow: 0 0 40px rgba(8,7,16,0.6);
+             padding: 50px 35px;
+             z-index: 2; /* Set higher z-index to be above particles */
+         }
+ 
+        /* Navbar styling */
+        nav {
+            background-color: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+             /* Footer sticky */
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+            background: linear-gradient(to right, #007bff, #343a40);
+            transition: background 0.5s ease;
+        }
+        footer:hover {
+            background: linear-gradient(to right, #343a40, #007bff);
+        }
+
+         /* Nav  Hover Animation  */
+         nav {
+            background: linear-gradient(to right, #007bff, #343a40);
+            color: white;
+            transition: background 0.5s ease;
+        }
+        
+        nav:hover {
+            background: linear-gradient(to right, #343a40, #007bff);
+        }
+ 
+         /* Other styles remain the same... */
+         /* Responsive design */
+@media screen and (max-width: 992px){
+    form{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px){
+    form{
+        width: 90%;
+    }
+}
+     </style>
+ </head>
+ <body>
+     <div id="particles-js"></div> <!-- Particles Container -->
+ 
+     <nav>
+         <h2>Quantum Simulator</h2>
+         <ul>
+             <li><a href="{% url 'home' %}">Home</a></li>
+             <li><a href="{% url 'about' %}">About Simulator</a></li>
+             <li><a href="{% url 'contact' %}">Contact</a></li>
+             <li><a href="{% url 'login' %}">Login</a></li>
+         </ul>
+     </nav>
+ 
+     {% if messages %}
+     {% for message in messages %}
+         <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+             {{ message }}
+         </div>
+     {% endfor %}
+     {% endif %}
+ 
+     <div class="background">
+         <div class="shape"></div>
+         <div class="shape"></div>
+     </div>
+ 
+     <form action="{% url 'signup' %}" method="post">
+         {% csrf_token %} 
+         <h1 style="text-align: center;"><span style="color: #f09819;">Quantum_Simulator</span></h1>
+         <h3 style="text-align: center;"><span style="color: greenyellow;">Signup Here</span></h3>
+         <label for="username">Username</label>
+         <input type="text" placeholder="Username" id="username" name="username">
+         <label for="email">Email</label>
+         <input type="email" placeholder="Email or Phone" id="email" name="email">
+         <label for="password1">Password</label>
+         <input type="password" placeholder="Password" id="password1" name="password1">
+         <label for="password2">Confirm Password</label>
+         <input type="password" placeholder="Confirm Password" id="password2" name="password2">
+         <button type="submit">Signup</button>
+         <br><br>
+         <p>Already have an account? <a href="{% url 'login' %}" >Login here</a></p>
+         {% comment %} <a href="{% url 'login' %}">I have already an account</a> {% endcomment %}
+     </form>
+ 
+     <footer class="footer">
+         <div class="container">
+             <p class="mb-0">Copyright &copy; CDAC-Patna | All rights reserved</p>
+         </div>
+     </footer>
+
+      <!-- Include your custom particles.js config -->
+      <script src="{% static 'js/particles-config.js' %}"></script>
+ 
+     {% comment %} <script>
+         // particles.js configuration script
+         particlesJS("particles-js", {
+             "particles": {
+                 "number": {
+                     "value": 80,
+                     "density": {
+                         "enable": true,
+                         "value_area": 800
+                     }
+                 },
+                 "color": {
+                     "value": "#ffffff"
+                 },
+                 "shape": {
+                     "type": "circle",
+                     "stroke": {
+                         "width": 0,
+                         "color": "#000000"
+                     },
+                     "polygon": {
+                         "nb_sides": 5
+                     }
+                 },
+                 "opacity": {
+                     "value": 0.5,
+                     "random": false,
+                     "anim": {
+                         "enable": false,
+                         "speed": 1,
+                         "opacity_min": 0.1,
+                         "sync": false
+                     }
+                 },
+                 "size": {
+                     "value": 3,
+                     "random": true,
+                     "anim": {
+                         "enable": false,
+                         "speed": 40,
+                         "size_min": 0.1,
+                         "sync": false
+                     }
+                 },
+                 "line_linked": {
+                     "enable": true,
+                     "distance": 150,
+                     "color": "#ffffff",
+                     "opacity": 0.4,
+                     "width": 1
+                 },
+                 "move": {
+                     "enable": true,
+                     "speed": 6,
+                     "direction": "none",
+                     "random": false,
+                     "straight": false,
+                     "out_mode": "out",
+                     "bounce": false,
+                     "attract": {
+                         "enable": false,
+                         "rotateX": 600,
+                         "rotateY": 1200
+                     }
+                 }
+             },
+             "interactivity": {
+                 "detect_on": "canvas",
+                 "events": {
+                     "onhover": {
+                         "enable": true,
+                         "mode": "repulse"
+                     },
+                     "onclick": {
+                         "enable": true,
+                         "mode": "push"
+                     },
+                     "resize": true
+                 },
+                 "modes": {
+                     "grab": {
+                         "distance": 400,
+                         "line_linked": {
+                             "opacity": 1
+                         }
+                     },
+                     "bubble": {
+                         "distance": 400,
+                         "size": 40,
+                         "duration": 2,
+                         "opacity": 8,
+                         "speed": 3
+                     },
+                     "repulse": {
+                         "distance": 200,
+                         "duration": 0.4
+                     },
+                     "push": {
+                         "particles_nb": 4
+                     },
+                     "remove": {
+                         "particles_nb": 2
+                     }
+                 }
+             },
+             "retina_detect": true
+         });
+     </script> {% endcomment %}
+ </body>
+ </html>
+ 
