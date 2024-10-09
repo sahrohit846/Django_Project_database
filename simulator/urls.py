@@ -26,7 +26,7 @@ admin.site.index_title = "Welcome to Quantum Circuit Portal Data"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('User_Dashboard/', user.site.urls)
+    # path('User_Dashboard/', user.site.urls),
     path('',include('home.urls'))
 ]
 

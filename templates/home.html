@@ -280,7 +280,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <head>
         <!-- Other existing tags like meta, title, etc. -->
-
+         
          <!--particles-js config-->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="{% static 'js/particles-config.js' %}"></script>
@@ -705,9 +705,9 @@
 
     <!-- Navbar -->
     <nav>
-        <h2>Quantum Simulator</h2>
+        <h2>QARN</h2>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'landing' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About Simulator</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -951,7 +951,7 @@
     <script src="{% static 'js/dynamic-count.js' %}}"></script>
 
     
-<script>
+{% comment %} <script>
 
  document.addEventListener('DOMContentLoaded', () => {
     const counters = document.querySelectorAll('.counter-value');
@@ -987,6 +987,6 @@
      });
   });
   
-</script> 
+</script> {% endcomment %}
 </body>
 </html> 
