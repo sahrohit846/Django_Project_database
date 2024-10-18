@@ -18,7 +18,10 @@
     
      <!-- Include your custom particles.js config -->
      <script src="{% static 'js/particles-config.js' %}"></script>
- 
+
+     <!-- for new animation -->
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     
     <style>
         /* Stylesheet */
@@ -255,8 +258,8 @@
     </footer>
 
    <!-- Include your custom particles.js config -->
-   <script src="{% static 'js/particles-config.js' %}"></script>
-    {% comment %} <script>
+ <script src="{% static 'js/particles-config.js' %}"></script>
+     <script>
         particlesJS("particles-js", {
             "particles": {
                 "number": {
@@ -361,7 +364,14 @@
                 }
             },
             "retina_detect": true
-        });
-    </script> {% endcomment %}
+        
+const tl = gsap.timeline({ repeat: -1, yoyo: true }); // Infinite looping animation
+
+tl.to("#particles-js", {
+  duration: 3,
+  scaleY: 1.1, // Make waves by scaling the background vertically
+  ease: "power1.inOut", // Control the wave movement
+}); 
+    </script> 
 </body>
 </html>
